@@ -1,0 +1,38 @@
+{
+  "name": "height-api",
+  "description": "Rest API for OS Terrain 50",
+  "version": "0.1",
+  "author": "Michael Gordon <michaeljohngordon@gmail.com>",
+  "contributors": [
+    {
+      "name": "Michael Gordon",
+      "email": "michaeljohngordon@gmail.com"
+      "linkedin": "uk.linkedin.com/pub/michael-gordon/19/303/260/"
+    },
+
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MichaelGordon/Height-API"
+  },
+  "bugs": {
+    "url": "https://github.com/MichaelGordon/Height-API/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.0",
+    "express": "~3.4.7",
+    "should.js": "~2.1.1",
+    "superagent": "~2.1.1",
+  },
+  "keywords": [
+    "height",
+    "api",
+    "rest",
+    "ordnance survey",
+    "open data"
+  ],
+  "main": "index",
+  "scripts": {
+    "test": "make all"
+  },
+}
