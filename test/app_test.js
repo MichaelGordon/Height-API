@@ -1,6 +1,6 @@
 var app  = require(__dirname + '/../app.js');
 var port = 3333;
-var superagent = require('superagent.js');
+// var superagent = require('superagent');
 var should = require('should.js');
 var http = require('http');
 
