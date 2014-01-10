@@ -1,7 +1,7 @@
 var app  = require(__dirname + '/../app.js');
 var port = 3333;
 // var superagent = require('superagent');
-var should = require('should.js');
+var should = require('should');
 var http = require('http');
 
 // Helper utility to format request from http://51elliot.blogspot.co.uk/2013/08/testing-expressjs-rest-api-with-mocha.html
