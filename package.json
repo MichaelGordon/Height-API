@@ -6,10 +6,9 @@
   "contributors": [
     {
       "name": "Michael Gordon",
-      "email": "michaeljohngordon@gmail.com"
+      "email": "michaeljohngordon@gmail.com",
       "linkedin": "uk.linkedin.com/pub/michael-gordon/19/303/260/"
-    },
-
+    }
   ],
   "repository": {
     "type": "git",
@@ -22,7 +21,7 @@
     "mocha": "~1.17.0",
     "express": "~3.4.7",
     "should.js": "~2.1.1",
-    "superagent": "~2.1.1",
+    "superagent": "~2.1.1"
   },
   "keywords": [
     "height",
@@ -34,5 +33,5 @@
   "main": "index",
   "scripts": {
     "test": "make all"
-  },
+  }
 }
