@@ -21,7 +21,7 @@
     "mocha": "~1.17.0",
     "express": "~3.4.7",
     "should.js": "~2.1.1",
-    "superagent": "~2.1.1"
+    "superagent": "~0.16.0"
   },
   "keywords": [
     "height",
