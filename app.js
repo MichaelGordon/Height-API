@@ -1,19 +1,21 @@
 var express = require('express');
-var app = module.exports = express();
+var http = require('http');
 
+var app = module.exports = express();
+app.use(express.logger());
+
+var server = http.createServer(app);
 
 app.get('/', function(req, res){
   res.send('hello world');
 });
 
-var server = app.listen(80); 
+ 
 
-server.listen();
-console.log('Express server started on port %s', app.address().port);
+server.listen(80);
+console.log('Listening on port ' + server.address().port);
 server.close();
  
- 
-
 // Make sure app is not started on default port if part of test suite
 
 if (!module.parent) {
