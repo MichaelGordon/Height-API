@@ -41,7 +41,7 @@ describe('app', function(){
  
 // Tests
  
-  it('should exist', function (done) {
+  it('App should exist', function (done) {
     console.log("Test 1")
     should.exist(app);
     done();
