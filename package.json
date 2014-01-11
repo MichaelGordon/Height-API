@@ -1,7 +1,7 @@
 {
   "name": "height-api",
   "description": "Rest API for OS Terrain 50",
-  "version": "0.1",
+  "version": "0.2",
   "author": "Michael Gordon <michaeljohngordon@gmail.com>",
   "contributors": [
     {
@@ -18,9 +18,10 @@
     "url": "https://github.com/MichaelGordon/Height-API/issues"
   },
   "devDependencies": {
-    "mocha": "~1.17.0",
-    "express": "~3.4.7",
-    "should": "~2.1.1"
+    "mocha": "latest",
+    "express": "latest",
+    "should": "latest",,
+    "superagent": "latest"
   },
   "keywords": [
     "height",
