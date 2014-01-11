@@ -6,7 +6,11 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-var server = app.listen(80); server.close()
+var server = app.listen(80); 
+
+server.listen();
+console.log('Express server started on port %s', app.address().port);
+server.close();
  
  
 
