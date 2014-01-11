@@ -37,6 +37,6 @@
   ],
   "main": "index",
   "scripts": {
-    "test": "app_test ./apps/Height-API/test"
+    "test": "test"
   }
 }
