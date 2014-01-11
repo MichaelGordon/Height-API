@@ -20,7 +20,7 @@
   "devDependencies": {
     "mocha": "latest",
     "express": "latest",
-    "should": "latest",,
+    "should": "latest",
     "superagent": "latest"
   },
   "keywords": [
