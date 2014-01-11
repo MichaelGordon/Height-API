@@ -1,7 +1,7 @@
 {
   "name": "height-api",
   "description": "Rest API for OS Terrain 50",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Michael Gordon <michaeljohngordon@gmail.com>",
   "contributors": [
     {
@@ -37,6 +37,6 @@
   ],
   "main": "index",
   "scripts": {
-    "test": "/test"
+    "test": "./apps/Height-API/test app_test.js"
   }
 }
