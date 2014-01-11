@@ -1,5 +1,5 @@
 var express = require('express');
-var app = exports.app = express();
+var app = module.exports = express();
 
 
 app.get('/', function(req, res){

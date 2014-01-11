@@ -23,8 +23,10 @@ describe('app', function(){
   before (function (done) {
     app.listen(port, function (err, result) {
       if (err) {
+          console.log("Error starting the server")
         done(err);
       } else {
+          console.log("Started the server")
         done();
       }
     });
@@ -33,22 +35,24 @@ describe('app', function(){
 // After tests close down the app
 
   after(function (done) {
+      console.log("Stopped the server")
     app.close();
   });
  
 // Tests
  
   it('should exist', function (done) {
+    console.log("Test 1")
     should.exist(app);
     done();
   });
  
   it('should be listening at localhost:3333', function (done) {
+    console.log("Test 2")
     var headers = defaultGetOptions('/');
     http.get(headers, function (res) {
       res.statusCode.should.eql(404);
       done();
     });
   });
-  
 });  
