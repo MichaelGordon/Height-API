@@ -3,18 +3,6 @@ var superagent = require('superagent');
 var should = require('should');
 var http = require('http');
 
-// Helper utility to format request from http://51elliot.blogspot.co.uk/2013/08/testing-expressjs-rest-api-with-mocha.html
-
-function defaultGetOptions(path) {
-  var options = {
-    "host": "localhost",
-    "port": app.get('port'),
-    "path": path,
-    "method": "GET",
-  };
-  return options;
-}
-
 describe('app', function(){
 
 // Before tests start up the app
@@ -37,7 +25,26 @@ describe('app', function(){
       }
     }));
   });
-
+ 
+// Tests
+ 
+  it('Test 1 - App should exist', function (done) {
+    should.exist(app);
+    done();
+  });
+ 
+  it('Test 2 - App should be listening at localhost:3333', function (done) {
+    request
+       .get('http://localhost:3333/')
+       .end(function(res){
+           res.should.exist;
+           res.statusCode.should.eql(200);
+           res.text.should.contain('hello world');
+       });
+      done();
+  });
+  
+  
 // After tests close down the app
 
   after(function (done) {
@@ -53,19 +60,5 @@ describe('app', function(){
       }
     });
   });
- 
-// Tests
- 
-  it('Test 1 - App should exist', function (done) {
-    should.exist(app);
-    done();
-  });
- 
-  it('Test 2 - App should be listening at localhost:3333', function (done) {
-    var headers = defaultGetOptions('/');
-    http.get(headers, function (res) {
-      res.statusCode.should.eql(404);
-      done();
-    });
-  });
-});  
+  
+});
