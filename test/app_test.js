@@ -22,12 +22,14 @@ describe('app', function(){
 
   before (function (done) {
     app.set('port', port);
+    app.set('env', 'test');
     app.listen(function (err, result) {
       if (err) {
           console.log("Error starting the server");
         done(err);
       } else {
           console.log("Started the server");
+          console.log(result.length);
         done();
       }
     });
