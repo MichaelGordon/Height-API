@@ -22,8 +22,8 @@ describe('app', function(){
   before (function (done) {
       
     // Set application environment name and port  
-    app.set('env', process.env.NODE_ENV || 'test');
-    app.set('port', process.env.PORT || 3333);
+    app.set('env', 'test');
+    app.set('port', 3333);
     
     // Start app
     app.listen(function (err) {
@@ -32,6 +32,7 @@ describe('app', function(){
         done(err);
       } 
       else {
+        console.log("Express server listening on port %d in %s mode", app.get('port'), app.get('env'));
         done();
       }
     });
