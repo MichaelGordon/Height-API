@@ -13,11 +13,11 @@ function startServer (port) {
     var server = http.createServer(app);
     console.log('Port should be ' + port);
     server.listen(port);
-    for (var i=0; i < server.address.length; i++) {
-        console.log(server.address(arguments[i]));
+    for (var i=0; i < app.address.length; i++) {
+        console.log(app.address(arguments[i]));
     }
-    for (var j=0; j < server.settings.length; j++) {
-        console.log(server.settings(arguments[j]));
+    for (var j=0; j < app.settings.length; j++) {
+        console.log(app.settings(arguments[j]));
     }
     //console.log(server.settings.env);
     //console.log('Listening on port ' + server.address().port);
