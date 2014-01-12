@@ -8,6 +8,10 @@ app.use(express.logger());
 
 function startServer (port) {
     var server = http.createServer(app);
+        server.on('error', function (e) {
+            console.log(e);
+        });
+    console.log('Port should be ' + port);
     server.listen(port);
     console.log(server.address);
     console.log(server.settings.env);
