@@ -26,7 +26,7 @@ describe('app', function(){
     app.set('port', 3333);
     
     // Start app
-    app.listen(function (err) {
+    app.listen(app.get('port'), '0.0.0.0', (function (err) {
       if (err) {
         console.log("Error starting the server");
         done(err);
@@ -35,8 +35,7 @@ describe('app', function(){
         console.log("Express server listening on port %d in %s mode", app.get('port'), app.get('env'));
         done();
       }
-    });
-  });
+    }));
 
 // After tests close down the app
 
