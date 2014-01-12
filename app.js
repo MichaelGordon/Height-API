@@ -3,14 +3,14 @@ var http = require('http');
 
 var app = module.exports = express();
 app.use(express.logger());
+app.configure(function(){
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
 
 // Function to start server on any port passed to it
 
 function startServer (port) {
     var server = http.createServer(app);
-        server.on('error', function (e) {
-            console.log(e);
-        });
     console.log('Port should be ' + port);
     server.listen(port);
     console.log(server.address);
