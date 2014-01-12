@@ -13,10 +13,9 @@ startServer(80);
 
 function startServer (portNumber) {
     console.log('Port should be ' + portNumber);
-    var server = http.createServer(app);
-    server.listen(portNumber);
-    console.log('Listening on port ' + server.address.port);
-    server.close();
+    app.listen(portNumber);
+    console.log('Listening on port ' + app.address.port);
+    app.close();
 }
 
 app.get('/', function(req, res){
