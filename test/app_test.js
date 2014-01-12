@@ -32,7 +32,6 @@ describe('app', function(){
         done(err);
       } 
       else {
-        console.log("Express server listening on port %d in %s mode",app.get('port'),app.get('env'));
         done();
       }
     });
@@ -49,7 +48,6 @@ describe('app', function(){
       }
       else {
         console.log("Stopped the server");
-        console.log(result.length);
         done();
       }
     });
