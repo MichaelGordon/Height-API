@@ -36,6 +36,7 @@ describe('app', function(){
         done();
       }
     }));
+  });
 
 // After tests close down the app
 
