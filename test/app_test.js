@@ -21,7 +21,8 @@ describe('app', function(){
 // Before tests start up the app
 
   before (function (done) {
-    app.listen(port, function (err, result) {
+    app.set('port', port);
+    app.listen(function (err, result) {
       if (err) {
           console.log("Error starting the server");
         done(err);
