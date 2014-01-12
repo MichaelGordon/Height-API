@@ -26,14 +26,13 @@ describe('app', function(){
     app.set('port', process.env.PORT || 3333);
     
     // Start app
-    app.listen(function (err, result) {
+    app.listen(function (err) {
       if (err) {
         console.log("Error starting the server");
         done(err);
       } 
       else {
         console.log("Express server listening on port %d in %s mode",app.get('port'),app.get('env'));
-        console.log(result.length);
         done();
       }
     });
@@ -43,7 +42,7 @@ describe('app', function(){
 
   after(function (done) {
     console.log("Stopping the server");
-    app.close(function (err, result) {
+    app.close(function (err) {
       if (err) {
           console.log("Error starting the server");
           done(err);
