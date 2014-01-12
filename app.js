@@ -11,11 +11,10 @@ startServer(80);
 
 // Function to start server on any port passed to it
 
-function startServer (port) {
-    console.log('Port should be ' + port);
+function startServer (portNumber) {
+    console.log('Port should be ' + portNumber);
     var server = http.createServer(app);
-    console.log('Port should be ' + port);
-    server.listen(port);
+    server.listen(portNumber);
     console.log('Listening on port ' + server.address.port);
     server.close();
 }
