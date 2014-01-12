@@ -1,4 +1,4 @@
 --require should
---reporter list
+--reporter spec
 --ui bdd
 --recursive

@@ -27,7 +27,6 @@ describe('app', function(){
         done(err);
       } else {
           console.log("Started the server");
-          console.log(result);
         done();
       }
     });
@@ -42,14 +41,12 @@ describe('app', function(){
  
 // Tests
  
-  it('App should exist', function (done) {
-    console.log("Test 1");
+  it('Test 1 - App should exist', function (done) {
     should.exist(app);
     done();
   });
  
-  it('should be listening at localhost:3333', function (done) {
-    console.log("Test 2");
+  it('Test 2 - App should be listening at localhost:3333', function (done) {
     var headers = defaultGetOptions('/');
     http.get(headers, function (res) {
       res.statusCode.should.eql(404);

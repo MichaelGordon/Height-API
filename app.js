@@ -11,13 +11,17 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-app.listen(3000);
-
 if (!module.parent) {
   app.listen(port, host, function () {
     console.log("Express server listening on port %d in %s mode",
     app.address().port,
     app.settings.env
   );
-  });
+  })}
+else {
+  app.listen(3000);
+  console.log("Express server listening on port %d in %s mode",
+    app.address().port,
+    app.settings.env
+  );
 }
