@@ -10,9 +10,9 @@ app.configure(function(){
 // Function to start server on any port passed to it
 
 function startServer (port) {
-    var server = http.createServer(app);
     console.log('Port should be ' + port);
-    server.listen(port);
+    console.log(app);
+    var server = http.createServer(app).listen(port);
     for (var i=0; i < server.address.length; i++) {
         console.log(server.address.length);
         console.log(server.settings.length);
