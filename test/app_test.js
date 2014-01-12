@@ -33,14 +33,20 @@ describe('app', function() {
         done();
     });
 
-    it('Test 2 - App should be listening at localhost:3333', function(done) {
+    it('Test 2 - App should be listening at localhost:3333 and returning status code 200', function(done) {
         superagent.get('http://localhost:3333/').end(function(res) {
             res.should.exist;
             res.statusCode.should.eql(200);
-            res.text.should.contain('hello world');
         });
         done();
     });
+    
+    it('Test 3 - / should contain hello world text', function(done) {
+        superagent.get('http://localhost:3333/').end(function(res) {
+            res.text.should.contain('hello world');
+        });
+        done();
+    });    
 
 
     // After tests close down the app
