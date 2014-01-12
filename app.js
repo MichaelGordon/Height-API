@@ -12,7 +12,7 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-if (module.parent) {
+if (!module.parent) {
     app.set('env', process.env.NODE_ENV || 'development');
     app.set('port', process.env.PORT || 80); 
     app.listen(app.get('port'), function () {
