@@ -1,5 +1,4 @@
 var app  = require('../app');
-var port = 3333;
 var superagent = require('superagent');
 var should = require('should');
 var http = require('http');
@@ -9,7 +8,7 @@ var http = require('http');
 function defaultGetOptions(path) {
   var options = {
     "host": "localhost",
-    "port": port,
+    "port": app.get('port'),
     "path": path,
     "method": "GET",
   };
@@ -21,15 +20,20 @@ describe('app', function(){
 // Before tests start up the app
 
   before (function (done) {
-    app.set('port', port);
-    app.set('env', 'test');
+      
+    // Set application environment name and port  
+    app.set('env', process.env.NODE_ENV || 'test');
+    app.set('port', process.env.PORT || 3333);
+    
+    // Start app
     app.listen(function (err, result) {
       if (err) {
-          console.log("Error starting the server");
+        console.log("Error starting the server");
         done(err);
-      } else {
-          console.log("Started the server");
-          console.log(result.length);
+      } 
+      else {
+        console.log("Express server listening on port %d in %s mode",app.get('port'),app.get('env'));
+        console.log(result.length);
         done();
       }
     });
@@ -38,8 +42,18 @@ describe('app', function(){
 // After tests close down the app
 
   after(function (done) {
-      console.log("Stopped the server");
-    app.close();
+    console.log("Stopping the server");
+    app.close(function (err, result) {
+      if (err) {
+          console.log("Error starting the server");
+          done(err);
+      }
+      else {
+        console.log("Stopped the server");
+        console.log(result.length);
+        done();
+      }
+    });
   });
  
 // Tests
