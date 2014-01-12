@@ -1,9 +1,10 @@
 var app = require('../app');
-var superagent = require('superagent');
 var should = require('should');
-var http = require('http');
+var superagent = require('superagent');
+var domain = ('http://' + process.env.IP + ':' + process.env.PORT);
+var server;
 
-describe('app', function() {
+describe('App Testing', function() {
 
     // Before tests start up the app
 
@@ -11,10 +12,10 @@ describe('app', function() {
 
         // Set application environment name and port  
         app.set('env', 'test');
-        app.set('port', 3333);
+        app.set('port', process.env.PORT || 3333);
 
         // Start app
-        app.listen(app.get('port'), '0.0.0.0', (function(err) {
+        server = app.listen(app.get('port'), process.env.IP, (function(err) {
             if (err) {
                 console.log("Error starting the server");
                 done(err);
@@ -33,29 +34,29 @@ describe('app', function() {
         done();
     });
 
-    it('Test 2 - App should be listening at localhost:3333 and returning status code 200', function(done) {
-        superagent.get('http://localhost:3333/').end(function(res) {
+    it('Test 2 - App should be listening at ' + process.env.IP + ':' + app.get('port') + '/ and returning status code 200', function(done) {
+        superagent.get(domain + '/').end(function(res) {
             res.should.exist;
             res.statusCode.should.eql(200);
         });
         done();
     });
-    
+
     it('Test 3 - / should contain hello world text', function(done) {
-        superagent.get('http://localhost:3333/').end(function(res) {
+        superagent.get(domain + '/').end(function(res) {
             res.text.should.contain('hello world');
         });
         done();
-    });    
+    });
 
 
     // After tests close down the app
 
     after(function(done) {
         console.log("Stopping the server");
-        app.close(function(err) {
+        server.close(function(err) {
             if (err) {
-                console.log("Error starting the server");
+                console.log("Error stopping the server");
                 done(err);
             }
             else {
@@ -64,5 +65,5 @@ describe('app', function() {
             }
         });
     });
-
+    
 });
