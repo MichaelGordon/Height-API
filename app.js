@@ -13,18 +13,10 @@ startServer(80);
 
 function startServer (port) {
     console.log('Port should be ' + port);
-    var server = http.createServer(app).listen(port);
-    for (var i=0; i < server.address.length; i++) {
-        console.log(server.address.length);
-        console.log(server.settings.length);
-        console.log(server.address(arguments[i]));
-    }
-    for (var j=0; j < app.settings.length; j++) {
-        console.log(app.settings.length);
-        console.log(app.settings(arguments[j]));
-    }
-    //console.log(server.settings.env);
-    //console.log('Listening on port ' + server.address().port);
+    var server = http.createServer(app);
+    server.listen(port);
+    console.log(server.settings.env);
+    console.log('Listening on port ' + server.address.port);
     server.close();
 }
 
