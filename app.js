@@ -13,15 +13,17 @@ app.get('/', function(req, res){
 
 if (!module.parent) {
   app.listen(port, host, function () {
+    console.log(process.env.NODE_ENV);
     console.log("Express server listening on port %d in %s mode",
-    app.address().port,
-    app.settings.env
+    process.env.port,
+    process.env.NODE_ENV
   );
   })}
 else {
   app.listen(3000);
-  console.log("Express server listening on port %d in %s mode",
-    app.address().port,
-    app.settings.env
+  console.log(process.env.NODE_ENV);
+    console.log("Express server listening on port %d in %s mode",
+    process.env.port,
+    process.env.NODE_ENV
   );
 }
