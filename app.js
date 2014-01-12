@@ -7,11 +7,12 @@ app.configure(function(){
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+startServer(80);
+
 // Function to start server on any port passed to it
 
 function startServer (port) {
     console.log('Port should be ' + port);
-    console.log(app);
     var server = http.createServer(app).listen(port);
     for (var i=0; i < server.address.length; i++) {
         console.log(server.address.length);
@@ -26,8 +27,6 @@ function startServer (port) {
     //console.log('Listening on port ' + server.address().port);
     server.close();
 }
-
-startServer(80);
 
 app.get('/', function(req, res){
   res.send('hello world');
