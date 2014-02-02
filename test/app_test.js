@@ -34,12 +34,25 @@ describe('Testing -', function() {
     });
 
     // Tests
-
+    
     it('Test 1 - App should exist', function(done) {
         should.exist(app);
         done();
     });
+    
+    describe('URL', function() {
+        
+        it('Test 1 - GET - / should redirect to Github repo and return 301', function(done) {
+            var agent = superagent.agent();
+            agent.get(domain + '/').end(function(err, res) {
+                should.not.exist(err);
+                res.should.exist;
+                res.redirects.should.include('https://github.com/MichaelGordon/Height-API');
+                done();
+            });
+        });
 
+    });
 
     describe('App methods', function() {
 
@@ -53,89 +66,118 @@ describe('Testing -', function() {
             });
         });
 
-        it('Test 2 - GET - /nearest returns json exception - missing parameter', function(done) {
+        it('Test 2 - POST - /nearest should exist and returns 405 and json exception - method not allowed', function(done) {
+            var agent = superagent.agent();
+            agent.post(domain + '/nearest').end(function(err, res) {
+                should.not.exist(err);
+                res.should.exist;
+                res.statusCode.should.eql(405);
+                res.should.be.json;
+                res.body.should.have.property('error', 'Method not allowed');
+                done();
+            });
+        });
+
+        it('Test 3 - DELETE - /nearest should exist and returns 405 json exception - method not allowed', function(done) {
+            var agent = superagent.agent();
+            agent.del(domain + '/nearest').end(function(err, res) {
+                should.not.exist(err);
+                res.should.exist;
+                res.statusCode.should.eql(405);
+                res.should.be.json;
+                res.body.should.have.property('error', 'Method not allowed');
+                done();
+            });
+        });
+
+    });
+
+    describe('App parameters', function() {
+
+        it('Test 1 - Missing parameter - /nearest returns 400 and json exception - missing parameter', function(done) {
             var agent = superagent.agent();
             agent.get(domain + '/nearest').end(function(err, res) {
                 should.not.exist(err);
                 res.should.exist;
+                res.statusCode.should.eql(400);
                 res.should.be.json;
                 res.body.should.have.property('error', 'Missing parameter - location');
                 done();
             });
         });
-
-        it('Test 3 - POST - /nearest should exist and return 405', function(done) {
+        
+        it('Test 2 - Valid location, postive longitude - /nearest?location=53.478112,0.108100 responds with 200 and returns json', function(done) {
             var agent = superagent.agent();
-            agent.post(domain + '/nearest').end(function(err, res) {
-                should.not.exist(err);
-                res.should.exist;
-                res.statusCode.should.eql(405);
-                done();
-            });
-        });
-
-        it('Test 4 - POST - /nearest returns json exception - method not allowed', function(done) {
-            var agent = superagent.agent();
-            agent.post(domain + '/nearest').end(function(err, res) {
-                should.not.exist(err);
-                res.should.exist;
-                res.should.be.json;
-                res.body.should.have.property('error', 'Method not allowed');
-                done();
-            });
-        });
-
-        it('Test 5 - DELETE /nearest should exist and return 405', function(done) {
-            var agent = superagent.agent();
-            agent.del(domain + '/nearest').end(function(err, res) {
-                should.not.exist(err);
-                res.should.exist;
-                res.statusCode.should.eql(405);
-                done();
-            });
-        });
-
-        it('Test 6 - DELETE - /nearest returns json exception - method not allowed', function(done) {
-            var agent = superagent.agent();
-            agent.del(domain + '/nearest').end(function(err, res) {
-                should.not.exist(err);
-                res.should.exist;
-                res.should.be.json;
-                res.body.should.have.property('error', 'Method not allowed');
-                done();
-            });
-        });
-    });
-
-    describe('App parameters', function() {
-
-        it('Test 1 - GET - /nearest?location=something returns something', function(done) {
-            var agent = superagent.agent();
-            agent.get(domain + '/nearest?location=something').end(function(err, res) {
+            agent.get(domain + '/nearest?location=53.478112,0.108100').end(function(err, res) {
                 should.not.exist(err);
                 res.should.exist;
                 res.statusCode.should.eql(200);
                 res.should.be.json;
-                res.body.should.have.property('location', 'something');
                 done();
             });
         });
-    });
-    /*
-        it('Test 6 - /nearest should return 400 for any other parameter', function(done) {
+        
+        it('Test 3 - Valid location, negative longitude - /nearest?location=53.496702,-2.001469 responds with 200 and returns json', function(done) {
             var agent = superagent.agent();
-            agent.get(domain + '/nearest?badparameter=bad').end(onResponse);
-
-            function onResponse(err, res) {
-                err.should.not.exist;
+            agent.get(domain + '/nearest?location=53.496702,-2.001469').end(function(err, res) {
+                should.not.exist(err);
+                res.should.exist;
+                res.statusCode.should.eql(200);
+                res.should.be.json;
+                done();
+            });
+        });
+        
+        it('Test 4 - Invalid location - /nearest?location=something responds with 400 and returns json exception', function(done) {
+            var agent = superagent.agent();
+            agent.get(domain + '/nearest?location=something').end(function(err, res) {
+                should.not.exist(err);
                 res.should.exist;
                 res.statusCode.should.eql(400);
-                console.log(res.statusCode);
-                return done();
-            }
+                res.should.be.json;
+                res.body.should.have.property('error', 'Invalid coordinates for parameter location. Must be WGS84 latitude,longitude');
+                done();
+            });
         });
+ /*       
+    describe('Database test', function() {
+        
+        it('Test 1 - Database exists', function(done) {
+           
+        });
+    });    
+    */    
+    describe('Content test', function() {
+        
+        it('Test 1 - Valid location, postive longitude - /nearest?location=53.478112,0.108100 responds with 200 and returns json with location: 53.478112,0.108100 as one of the attributes ', function(done) {
+            var agent = superagent.agent();
+            agent.get(domain + '/nearest?location=53.478112,0.108100').end(function(err, res) {
+                should.not.exist(err);
+                res.should.exist;
+                res.statusCode.should.eql(200);
+                res.should.be.json;
+                res.body.should.have.property('location', '53.478112,0.108100');
+                done();
+            });
+        });
+        
+        it('Test 2 - Valid location, negative longitude - /nearest?location=53.496702,-2.001469 responds with 200 and returns json with location: 53.496702,-2.001469 as one of the attributes', function(done) {
+            var agent = superagent.agent();
+            agent.get(domain + '/nearest?location=53.496702,-2.001469').end(function(err, res) {
+                should.not.exist(err);
+                res.should.exist;
+                res.statusCode.should.eql(200);
+                res.should.be.json;
+                res.body.should.have.property('location', '53.496702,-2.001469');
+                done();
+            });
+        });
+        
+        });
+
+
     });
-*/
+
     // After tests close down the app
 
     after(function(done) {
